@@ -1,25 +1,33 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import { Provider } from 'react-redux';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from 'react-router-dom';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import CustomHook from './customHook';
+import TestEffect from './useEffect';
+import TestState from './useState';
+import TestRedux from './redux';
+import RouterHook from './router';
+import configureStore from './redux/store/configureStore';
+
+
+const App = (props) => (
+  <Provider store={configureStore()}>
+    <Router>
+      <Switch>
+        <Redirect exact from='/' to='/CustomHook' />
+        <Route path='/TestEffect' component={TestEffect} />
+        <Route path='/TestState' component={TestState} />
+        <Route path='/TestRedux' component={TestRedux} />
+        <Route path='/CustomHook' component={CustomHook} />
+        <Route path='/RouterHook' component={RouterHook} />
+      </Switch>
+    </Router>
+  </Provider>
+);
 
 export default App;
